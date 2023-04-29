@@ -1,10 +1,35 @@
 .post-list {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 2;
 }
 .list-title {
   font-size: 14px;
   font-weight: bold;
   padding: 12px;
+}
+.blog-list-wrapper{
+  display: flex;
+  justify-content: space-between;
+  line-height: 12px;
+  .list-item{
+    flex: 1 0 0%;
+  }
+
+  .citation-list{
+    text-align: left;
+    padding: 0 20px;
+  }
+}
+.blog-list-block{
+  display: block;
+  opacity: 1;
+  animation: fadeIn 1s;
+}
+
+.display-none{
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease,
+
 }

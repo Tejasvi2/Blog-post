@@ -3,20 +3,20 @@ import './blogPost.scss';
 import ReactHtmlParser from 'html-react-parser';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-// import CommentList from './CommentList';
 
 const BlogPost = (props) => {
-  const { post } = props;
+  const { post, isExploreMode } = props;
   const [show, setShow] = useState(false);
-  const [childPosts, setChildPosts] = useState({});
+  const [childPosts, setChildPosts] = useState({title:'', content: ''});
 
   const handleLinkClick = (event, docId) => {
     event.preventDefault();
     console.log('Link clicked:', docId);
     console.log({post})
     const childPost = post.child_posts.find((item)=> item.id == docId);
-    console.log({childPost})
     setChildPosts(childPost)
+    console.log({childPosts})
+
 
 
     setShow(true)
@@ -41,7 +41,8 @@ const BlogPost = (props) => {
   }
 
   return (
-    <div className="post">
+    <div className={isExploreMode ? 'expanded-post' : 'shrink-post'}>
+      <div className='post'>
       <h2 className="title">{post.title}</h2>  
       <span className="body">{ReactHtmlParser(post.content, options)}</span>
       <Popup open={show} position="right center" onClose={onClosePopup} modal>
@@ -49,13 +50,12 @@ const BlogPost = (props) => {
           <div>
             <div className="post">
             <div className='header-flex'>
-              <h2 className="title">{childPosts.title}</h2>
+              <h2 className="title">{childPosts?.title}</h2>
               <span className="close" onClick={close}>
               X
             </span>
               </div>
-              <span className="body">{childPosts.content}
-              </span>
+              <span className="body modal">{ReactHtmlParser(childPosts?.content, '')}</span>
             </div>
             
           </div>
@@ -63,6 +63,7 @@ const BlogPost = (props) => {
 
       </Popup>
       {/* <CommentList comments={post.comments} /> */}
+    </div>
     </div>
   );
 };
