@@ -5,22 +5,18 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 const BlogPost = (props) => {
-  const { post, isExploreMode } = props;
+  const { post, isExploreMode, onChildEvent } = props;
   const [show, setShow] = useState(false);
-  const [childPosts, setChildPosts] = useState({title:'', content: ''});
+  const [childPosts, setChildPosts] = useState({ title: '', content: '' });
 
   const handleLinkClick = (event, docId) => {
     event.preventDefault();
     console.log('Link clicked:', docId);
-    console.log({post})
-    const childPost = post.child_posts.find((item)=> item.id == docId);
+    console.log({ post })
+    const childPost = post.child_posts.find((item) => item.id == docId);
     setChildPosts(childPost)
-    console.log({childPosts})
-
-
-
+    console.log({ childPosts })
     setShow(true)
-    props.onChildEvent(event);
   }
 
   const options = {
@@ -40,30 +36,33 @@ const BlogPost = (props) => {
     setShow(false);
   }
 
+  const onExpandView = (childpost) => {
+    onChildEvent(childpost); // navigate to parent and then open childPost component
+  }
+
   return (
     <div className={isExploreMode ? 'expanded-post' : 'shrink-post'}>
       <div className='post'>
-      <h2 className="title">{post.title}</h2>  
-      <span className="body">{ReactHtmlParser(post.content, options)}</span>
-      <Popup open={show} position="right center" onClose={onClosePopup} modal>
-        {close => (
-          <div>
-            <div className="post">
-            <div className='header-flex'>
-              <h2 className="title">{childPosts?.title}</h2>
-              <span className="close" onClick={close}>
-              X
-            </span>
+        <h2 className="title">{post?.title}</h2>
+        <span className="body">{ReactHtmlParser(post?.content, options)}</span>
+        <Popup open={show} position="right center" onClose={onClosePopup} modal>
+          {close => (
+            <div>
+              <div className="post">
+                <div className='header-flex'>
+                  <h2 className="title">{childPosts?.title}</h2>
+                  <span className="close" onClick={() => onExpandView(childPosts)}>
+                    X
+                  </span>
+                </div>
+                <span className="body modal">{ReactHtmlParser(childPosts?.content, '')}</span>
               </div>
-              <span className="body modal">{ReactHtmlParser(childPosts?.content, '')}</span>
-            </div>
-            
-          </div>
-        )}
 
-      </Popup>
-      {/* <CommentList comments={post.comments} /> */}
-    </div>
+            </div>
+          )}
+        </Popup>
+        {/* <CommentList comments={post.comments} /> */}
+      </div>
     </div>
   );
 };

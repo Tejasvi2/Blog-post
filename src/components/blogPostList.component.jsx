@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './blogPostList.scss';
-import BlogPost from './blogpost/blogPost.component'
+import BlogPost from './blogpost/blogPost.component';
 import Citation from './citation/citation.component';
 
-const BlogPostList = () => {
 
+const BlogPostList = () => {
   let [blogPost, setBlogPost] = useState([]);
   let [isExploreMode, setExploreMode] = useState(true);
 
@@ -110,11 +110,11 @@ const BlogPostList = () => {
     setBlogPost(blogPost);
   }, [])
 
-  const toggleShowHide = () => {
-    console.log('clickeddd')
+  const navigateToChildPost = (event) => {
+    console.log('clickeddd', event);
+    const url = `${window.location.origin}/post/${event?.id}?state=${encodeURIComponent(JSON.stringify(event))}`;
+    window.open(url, '_blank');
   }
-
-
 
 
   return (
@@ -123,18 +123,18 @@ const BlogPostList = () => {
       <button onClick={() => setExploreMode(!isExploreMode)}>Explore</button>
       {blogPost.map((post) => {
         return (
-          <div className={isExploreMode ? 'blog-list-block' : 'blog-list-wrapper' }>
+          <div className={isExploreMode ? 'blog-list-block' : 'blog-list-wrapper'}>
             <div className="list-item citation-list">
-            <div className={isExploreMode ? 'display-none' : ''}>
-              <Citation citation={post.citation} reference={post.reference}></Citation>
-            </div>
+              <div className={isExploreMode ? 'display-none' : ''}>
+                <Citation citation={post.citation} reference={post.reference}></Citation>
+              </div>
             </div>
             <div className="list-item post-list">
-              <BlogPost key={post.id} post={post} isExploreMode={isExploreMode} onChildEvent={toggleShowHide} />
+              <BlogPost key={post.id} post={post} isExploreMode={isExploreMode} onChildEvent={navigateToChildPost} />
             </div>
             <div className="list-item">
-            <div className={isExploreMode ? 'display-none' : ''}>
-              <h4>comments</h4>
+              <div className={isExploreMode ? 'display-none' : ''}>
+                <h4>comments</h4>
               </div>
             </div>
           </div>
