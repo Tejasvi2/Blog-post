@@ -1,7 +1,7 @@
 .post-list {
   flex-direction: column;
   align-items: center;
-  flex: 2;
+  flex: 2 0 13%;
 }
 .list-title {
   font-size: 14px;
@@ -13,12 +13,15 @@
   justify-content: space-between;
   line-height: 12px;
   .list-item{
-    flex: 1 0 0%;
+    flex: 1 0 5%;
   }
 
   .citation-list{
     text-align: left;
     padding: 0 20px;
+  }
+  .comments-list{
+    flex: 1 0 0%;
   }
 }
 .blog-list-block{
@@ -32,4 +35,16 @@
   opacity: 0;
   transition: opacity 0.3s ease,
 
+}
+
+.explore-cls {
+  border: 0;
+    background: transparent;
+    color: #882efa;
+    font-weight: 700;
+    justify-content: flex-end;
+    position: absolute;
+    right: 22%;
+    top: 3%;
+    text-decoration: underline;
 }

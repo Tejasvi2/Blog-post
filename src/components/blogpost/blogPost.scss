@@ -31,7 +31,7 @@
   }
 
   .shrink-post {
-    max-width: 580px;
+    max-width: 610px;
   }
   .post {
       a:-webkit-any-link {
@@ -65,11 +65,16 @@
     overflow: auto;
     line-height: 17px;
   }
-  .close{
-    top: 4%;
+  .close {
+    top: 2%;
     position: absolute;
-    right: 5%;
-    font-weight: 600;
+    right: 0%;
+    font-weight: 900;
+    pointer-events: fill;
+  }
+  .img-expand {
+    width: 12px;
+    padding: 12px;
   }
   .comment-list {
     margin-top: 20px;

@@ -15,7 +15,11 @@ const ChildPost = () => {
     return (
 
         childPostList ?
-            <BlogPost key={childPostList?.id} post={childPostList} isExploreMode={true} /> : ''
+            <div className="post-wrapper">
+                <h3>{childPostList?.title}</h3>
+              <BlogPost key={childPostList?.id} post={childPostList} isExploreMode={true} />
+            </div>
+             : ''
     )
 
 

@@ -13,7 +13,7 @@ const BlogPost = (props) => {
     event.preventDefault();
     console.log('Link clicked:', docId);
     console.log({ post })
-    const childPost = post.child_posts.find((item) => item.id == docId);
+    const childPost = post.child_post.find((item) => item.id == docId);
     setChildPosts(childPost)
     console.log({ childPosts })
     setShow(true)
@@ -52,7 +52,7 @@ const BlogPost = (props) => {
                 <div className='header-flex'>
                   <h2 className="title">{childPosts?.title}</h2>
                   <span className="close" onClick={() => onExpandView(childPosts)}>
-                    X
+                  <img src={require('../../assets/icons/expand.png')} class="img-expand" />
                   </span>
                 </div>
                 <span className="body modal">{ReactHtmlParser(childPosts?.content, '')}</span>

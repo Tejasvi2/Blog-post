@@ -10,7 +10,7 @@ const Citation = (props) => {
             {citation?.map((val, key) => {
                 return (
                     <div className="description">
-                       <span className="break-word"> {key+1}. {val.description}</span>
+                       <span className="break-word"> {key+1}. {val.description} {val.text}</span>
                        <a href={val.link} className="citation-link">{val.link}</a>
                     </div>
                 )
@@ -21,7 +21,8 @@ const Citation = (props) => {
                 reference?.map((val, key)=>{
                     return (
                         <div className="description">
-                            <span className="break-word"> {key+1}. {val.description}</span>
+                            <span className="break-word"> {key+1}. {val.text}</span>
+                            <a href={val.link} className="citation-link">{val.link}</a>
                         </div>
                     )
                 })
